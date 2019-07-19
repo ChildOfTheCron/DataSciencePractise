@@ -92,7 +92,7 @@ def _median_even(xs: List[float]) -> float:
 	# If len(xs) is even, it's the average o the middle two elements
 	sorted_xs = sorted(xs)
 	hi_midpoint = len(xs) // 2 # eg. langth = 4 high midpoint = 2
-	return (sorted[hi_midpoint - 1] + sorted_xs[hi_midpoint])/2
+	return (sorted_xs[hi_midpoint - 1] + sorted_xs[hi_midpoint])/2
 def median(v: List[float]) -> float:
 	#Finds the middle most value of v
 	return _median_even(v) if len(v) % 2 == 0 else _median_odd(v)
