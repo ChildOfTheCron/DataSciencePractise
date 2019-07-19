@@ -3,6 +3,9 @@ import math
 from typing import Tuple
 from typing import Callable
 
+from collections import Counter
+import matplotlib.pyplot as plt
+
 Vector = List[float]
 Matrix = List[List[float]]
 
@@ -78,6 +81,22 @@ def identity_matrix(n: int) -> Matrix:
 	#Returns the n x n identity matrix
 	return make_matrix(n, n, lambda i, j:1 if i == j else 0)
 
+# Average Functions
+def mean(xs: List[float]) -> float:
+	return sum(xs) / len(xs)
+
+def _median_odd(xs: List[float]) -> float:
+	# If len(xs) is odd, the median is the middle element
+	return sorted(xs)[len(xs) //2]
+def _median_even(xs: List[float]) -> float:
+	# If len(xs) is even, it's the average o the middle two elements
+	sorted_xs = sorted(xs)
+	hi_midpoint = len(xs) // 2 # eg. langth = 4 high midpoint = 2
+	return (sorted[hi_midpoint - 1] + sorted_xs[hi_midpoint])/2
+def median(v: List[float]) -> float:
+	#Finds the middle most value of v
+	return _median_even(v) if len(v) % 2 == 0 else _median_odd(v)
+
 # Vector Tests
 # [5,7,9]
 print(add([1,2,3],[4,5,6]))
@@ -99,3 +118,17 @@ print(magnitude([3,4]))
 #(2,3)
 print(shape([[1,2,3],[4,5,6]]))
 print(identity_matrix(5))
+
+num_friends = [12, 45,23,43,54,2,5,34,54,34,54,34,54,23,74,72,34,32,22,13,55,38]
+friend_counts = Counter(num_friends)
+xs = range(101)
+ys = [friend_counts[x] for x in xs]
+#plt.bar(xs,ys)
+#plt.axis([0,101,0,25])
+#plt.title("Histogram of Friend Counts")
+#plt.xlabel("# of friends")
+#plt.ylabel("# of people")
+#plt.show()
+
+print(mean(num_friends))
+print(median(num_friends))
